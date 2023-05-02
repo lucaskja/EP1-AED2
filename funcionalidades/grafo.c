@@ -1,18 +1,18 @@
 #include "init.c"
 
-void adicionaAresta(Grafo *G, char *v, char *w, Vertice **conjuntoVertices) {
+void adicionaAresta(Grafo *G, char *v, char *w, Vertice **vertices) {
     int lugarInsercao;
     Vertice *novaConexao = (Vertice*) malloc(sizeof(Vertice));
     
     for (int i = 0; i < G->numVertices; i++) {
-        if (strcmp(conjuntoVertices[i]->nomeVertice, v) == 0) {
-            lugarInsercao = conjuntoVertices[i]->rotulo;
+        if (strcmp(vertices[i]->nomeVertice, v) == 0) {
+            lugarInsercao = vertices[i]->rotulo;
         }
         
-        if (strcmp(conjuntoVertices[i]->nomeVertice, w) == 0) {
-            novaConexao->nomeVertice = conjuntoVertices[i]->nomeVertice;
-            novaConexao->rotulo = conjuntoVertices[i]->rotulo;
-            novaConexao->prox = conjuntoVertices[i]->prox;
+        if (strcmp(vertices[i]->nomeVertice, w) == 0) {
+            novaConexao->nomeVertice = vertices[i]->nomeVertice;
+            novaConexao->rotulo = vertices[i]->rotulo;
+            novaConexao->prox = vertices[i]->prox;
         }
     }
     
@@ -26,13 +26,12 @@ void criaGrafo(Grafo *G, Vertice **vertices, char **entrada) {
         char *conexao = (char*) malloc(TAM_PALAVRA * sizeof(char));
         strcpy(nomeVertice, entrada[i]);
         strtok(nomeVertice, ":");
+        strcpy(G->nomesVertice[i], nomeVertice);
 
         while ((conexao = strtok(NULL, ";")) != NULL) {
             if(conexao[0] == ' ') conexao +=1;
             adicionaAresta(G, nomeVertice, conexao, vertices);
         }
-        free(nomeVertice);
-        free(conexao);
     }
 }
 
@@ -44,12 +43,11 @@ Grafo* transposta(Grafo* G, Vertice** vertices) {
     return GR;
 }
 
-void imprimeGrafo(Grafo* G, Vertice** vertices){ 
-    puts("---------Imprimindo Grafo------------");
+void imprimeGrafo(Grafo* G){ 
     for (int i = 0; i < G->numVertices; i++) {
-        printf("As conexões do vertice na pos[%i] (%s) são: ", i, vertices[i]->nomeVertice);
+        printf("%s:", G->nomesVertice[i]);
         for (Vertice *p = G->listaAdj[i]; p != NULL; p = p->prox) {
-            printf("%s ", p->nomeVertice);
+            printf("%s;", G->nomesVertice[p->rotulo]);
         }
         printf("\n");
     }

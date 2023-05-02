@@ -4,11 +4,12 @@ Grafo *inicializaGrafo(int numVertices) {
     Grafo *G = (Grafo*) malloc(sizeof(Grafo));
 
     G->numVertices = numVertices;
-
-    G->listaAdj = (Vertice**) malloc(numVertices * sizeof(Vertice**));
+    G->nomesVertice = (char**) malloc (sizeof(char*)*numVertices);
+    G->listaAdj = (Vertice**) malloc(numVertices * sizeof(Vertice*));
 
     for (int i = 0; i < numVertices; i++) {
         G->listaAdj[i] = NULL;
+        G->nomesVertice[i] = (char*) malloc (sizeof(char)*TAM_PALAVRA);
     }
 
     return G;
@@ -20,6 +21,12 @@ Vertice **inicializaVertices(int numVertices) {
     for (int i = 0; i < numVertices; i++) vertices[i] = (Vertice*) malloc(sizeof(Vertice));
 
     return vertices;
+}
+
+Fila *inicializaFila(){
+    Fila* fila = (Fila*) malloc(sizeof(Fila));
+
+    return fila;
 }
 
 int *inicializaCor(int numVertices) {

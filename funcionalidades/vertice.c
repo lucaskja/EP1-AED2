@@ -7,7 +7,6 @@ void preencheVertices(Vertice **vertices, int numVertices, char **entrada) {
         strtok(nomeVertice, ":");
         
         vertices[i]->nomeVertice = nomeVertice;
-        strcpy(vertices[i]->nomeVertice, nomeVertice);
         vertices[i]->prox = NULL;
         vertices[i]->rotulo = i;
     }
