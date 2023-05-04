@@ -45,9 +45,9 @@ Grafo* transposta(Grafo* G, Vertice** vertices) {
 
 void imprimeGrafo(Grafo* G){ 
     for (int i = 0; i < G->numVertices; i++) {
-        printf("%s:", G->nomesVertice[i]);
+        printf("%s: ", G->nomesVertice[i]);
         for (Vertice *p = G->listaAdj[i]; p != NULL; p = p->prox) {
-            printf("%s;", G->nomesVertice[p->rotulo]);
+            printf("%s; ", G->nomesVertice[p->rotulo]);
         }
         printf("\n");
     }
