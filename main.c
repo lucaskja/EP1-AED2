@@ -9,6 +9,7 @@ int main(){
     char **entradaUsuario = leituraEntrada(numVertices);
 
     scanf("%i", &casoK);
+    
     // INICIALIZA AS VARIÁVEIS
     Grafo *G = inicializaGrafo(numVertices);
     Fila *fila = inicializaFila();
@@ -31,16 +32,13 @@ int main(){
 
     printf("%d\n", k);
     
-    // puts("Criando Novo Grafo: ");
     Grafo *GFC = criaGrafoCFC(k, G, cfc);
 
-    // puts("DFS: ");
     DFS(GFC, fila);
-    // puts("Imprimindo Fila: ");
+
     imprimeFila(fila);
 
     printf("\n");
 
-    //imprime o grafo de componentes fortemente conectadas
     imprimeGrafo(GFC);
 }
