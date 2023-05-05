@@ -1,5 +1,9 @@
 #include "init.c"
 
+void copiarNomeVertices(Grafo *GT, Grafo *G) {
+    for (int i = 0; i < GT->numVertices; i++) strcpy(GT->nomesVertice[i], G->nomesVertice[i]);
+}
+
 char **copiarEntrada(int n, char **entrada) {
     char** copiaEntrada = (char**) malloc(sizeof(char**));
 
@@ -51,12 +55,13 @@ void criaGrafo(Grafo *G, char **entrada) {
     }
 }
 
-Grafo* transposta(Grafo* G, Vertice** vertices) {
-    Grafo* GR = inicializaGrafo(G->numVertices);
+Grafo* transposta(Grafo* G) {
+    Grafo* GT = inicializaGrafo(G->numVertices);
+    copiarNomeVertices(GT, G);
     for (int v = 0; v < G->numVertices; v++) 
-        for (Vertice* a = (G->listaAdj[v]); a != NULL; a = a->prox)
-            adicionaAresta(GR, a->nomeVertice, vertices[v]->nomeVertice);
-    return GR;
+        for (Vertice *a = G->listaAdj[v]; a != NULL; a = a->prox)
+            adicionaAresta(GT, a->nomeVertice, G->nomesVertice[v]);
+    return GT;
 }
 
 void imprimeGrafo(Grafo* G){ 
