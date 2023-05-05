@@ -1,18 +1,17 @@
 #include "init.c"
 
 void copiarNomeVertices(Grafo *GT, Grafo *G) {
-    for (int i = 0; i < GT->numVertices; i++) strcpy(GT->nomesVertice[i], G->nomesVertice[i]);
+    for (int i = 0; i < GT->numVertices; i++) GT->nomesVertice[i] = strdup(G->nomesVertice[i]);
 }
 
 char **copiarEntrada(int n, char **entrada) {
-    char** copiaEntrada = (char**) malloc(sizeof(char**));
+    char** cEntrada = (char**) malloc(sizeof(char*));
 
-    for (int i = 0; i < n; i++){ 
-        copiaEntrada[i] = (char*) malloc(TAM_PALAVRA * sizeof(char));
-        strcpy(copiaEntrada[i], entrada[i]);
-    }
+    for (int i = 0; i < n; i++) cEntrada[i] = (char*) malloc(TAM_PALAVRA * sizeof(char));
+
+    for (int i = 0; i < n; i++) cEntrada[i] = strdup(entrada[i]);
     
-    return copiaEntrada;
+    return cEntrada;
 }
 
 int buscarVertice(Grafo* G, char* name) {
@@ -29,7 +28,7 @@ void adicionaAresta(Grafo *G, char *v, char *w) {
     novaConexao->nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
     novaConexao->prox = (Vertice*) malloc(sizeof(char));
 
-    strcpy(novaConexao->nomeVertice, G->nomesVertice[buscarVertice(G, w)]);
+    novaConexao->nomeVertice = G->nomesVertice[buscarVertice(G, w)];
     novaConexao->rotulo = buscarVertice(G, w);
     
     novaConexao->prox = G->listaAdj[buscarVertice(G, v)];
@@ -41,7 +40,7 @@ void criaGrafo(Grafo *G, char **entrada) {
 
     for(int i = 0; i < G->numVertices; i++) {
         char *nomeVertice = strtok(copiaEntrada[i], ":");
-        strcpy(G->nomesVertice[i], nomeVertice);
+        G->nomesVertice[i] = strdup(nomeVertice);
     }
 
     for(int i = 0; i < G->numVertices; i++) {

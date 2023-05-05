@@ -1,4 +1,4 @@
-#include "vertice.c"
+#include "grafo.c"
 
 char **leituraEntrada(int numVertices) {
     char temp; //variável temporária para não termos problemas com os multíplos scanfs.

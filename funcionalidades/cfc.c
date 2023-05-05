@@ -7,16 +7,16 @@ char** criaListaDeNomes(Grafo *G, int* cfc, int k){
         nomeVertices[i] = (char*) malloc(sizeof(char) * 100);
     }
     i = u = 0;
-    char aux [100] = "";
-    char empty[] = "";
+    char *aux = (char*) malloc(TAM_PALAVRA * sizeof(char));
+    char *empty = (char*) malloc(TAM_PALAVRA * sizeof(char));
     while (i  < k){
         for(j = 0; j < G->numVertices; j++){
             if(cfc[j] == i){
                 strcat(aux, G->nomesVertice[j]);
             }
         }
-        strcpy(nomeVertices[i], aux);
-        strcpy(aux, empty);
+        nomeVertices[i] = strdup(aux);
+        aux = strdup(empty);
         i++;
     }
     return nomeVertices;
