@@ -29,32 +29,8 @@ Fila *inicializaFila(){
     return fila;
 }
 
-int *inicializaCor(int numVertices) {
-    int *cor = (int*) malloc(numVertices * sizeof(int));
+int *inicializaVetorInt(int numVertices) {
+    int *vetorInt = (int*) malloc(numVertices * sizeof(int));
     
-    return cor;
-}
-
-int *inicializaDescoberto(int numVertices) {
-    int *d = (int*) malloc(numVertices * sizeof(int));
-    
-    return d;
-}
-
-int *inicializaFinalizado(int numVertices) {
-    int *f = (int*) malloc(numVertices * sizeof(int));
-    
-    return f;
-}
-
-int *inicializaComponenteFortementeConectado(int numVertices) {
-    int *cfc = (int*) malloc(numVertices * sizeof(int));
-
-    return cfc;
-}
-
-int *inicializaVisitados(int numVertices) {
-    int *visitados = (int*) malloc(numVertices * sizeof(int));
-
-    return visitados;
+    return vetorInt;
 }

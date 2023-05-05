@@ -16,12 +16,12 @@ void DFSVisit(Grafo* G, int u, int* cor, Fila *Fila){
     Fila->sentinela->prox = b;
 }
 
-void DFS(Grafo* G, Fila *Fila, Vertice** vertices){
+void DFS(Grafo* G, Fila *Fila){
     Fila->nomesVertice = G->nomesVertice;
     Fila->sentinela = (Vertice*) malloc(sizeof(Vertice));
     Fila->sentinela->prox = NULL;
     Fila->sentinela->rotulo = -1;
-    int* cor = inicializaCor(G->numVertices);
+    int* cor = inicializaVetorInt(G->numVertices);
     for(int u = 0 ; u < G->numVertices ; u++){
         cor[u] = 0;
     }
@@ -32,7 +32,7 @@ void DFS(Grafo* G, Fila *Fila, Vertice** vertices){
     }
 }
 
-void imprimeFila(Fila* Fila, Vertice** vertices){
+void imprimeFila(Fila* Fila){
     Vertice *u = Fila->sentinela->prox;
     while(u){
         printf("%s ", Fila->nomesVertice[u->rotulo]);

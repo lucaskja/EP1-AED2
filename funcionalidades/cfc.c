@@ -21,7 +21,7 @@ char** criaListaDeNomes(Grafo *G, int* cfc, int k){
     }
     return nomeVertices;
 }
-char* insereNovaAresta(Grafo *G, int* cfc, int i, Grafo *GCF, char** nomeVertices, Vertice** vertices){
+void insereNovaAresta(Grafo *G, int* cfc, int i, Grafo *GCF, char** nomeVertices){
     int j = 0;
     // for(int i = 0; i < G->numVertices; i++) printf("vertices[%i]->nomeVertice = '%s'", i, G->nomesVertice[i]);
     while(j < G->numVertices){
@@ -29,7 +29,7 @@ char* insereNovaAresta(Grafo *G, int* cfc, int i, Grafo *GCF, char** nomeVertice
             Vertice *vertice = G->listaAdj[j];
             while(vertice){
                 if(cfc[vertice->rotulo] != i){
-                    adicionaAresta(GCF, nomeVertices[i], nomeVertices[cfc[vertice->rotulo]], vertices);
+                    adicionaAresta(GCF, nomeVertices[i], nomeVertices[cfc[vertice->rotulo]]);
                 }
                 vertice = vertice->prox;
             }
@@ -38,13 +38,13 @@ char* insereNovaAresta(Grafo *G, int* cfc, int i, Grafo *GCF, char** nomeVertice
     }
 }
 
-Grafo *criaGrafoCFC(int k, Grafo *G, int* cfc, Vertice** vertices){
+Grafo *criaGrafoCFC(int k, Grafo *G, int* cfc){
     char** nomeVertices = criaListaDeNomes(G, cfc, k);
     Grafo *GCF = inicializaGrafo(k);
-    criaGrafo(GCF, vertices, nomeVertices);
+    criaGrafo(GCF, nomeVertices);
     int i;
     for (i = 0 ; i < k ; i++){
-        insereNovaAresta(G, cfc, i, GCF, nomeVertices, vertices); 
+        insereNovaAresta(G, cfc, i, GCF, nomeVertices); 
     }
     return GCF;
 }

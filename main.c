@@ -1,55 +1,73 @@
 #include "./funcionalidades/cfc.c"
 
 int main(){
-    char temp;
-    int numVertices, casoK;
-    scanf("%i", &numVertices);
-    scanf("%c", &temp);
+    // char temp;
+    // int numVertices, casoK;
+    // scanf("%i", &numVertices);
+    // scanf("%c", &temp);
+    int numVertices = 3;
 
-    char **entradaUsuario = leituraEntrada(numVertices);
+    // char **entradaUsuario = leituraEntrada(numVertices);
 
-    scanf("%i", &casoK);
+    // scanf("%i", &casoK);
 
     // INICIALIZA AS VARIÁVEIS
     Grafo *G = inicializaGrafo(numVertices);
-    Vertice **vertices = inicializaVertices(numVertices);
-    Fila *fila = inicializaFila();
-    int *visitados = inicializaVisitados(numVertices);
-    int *cfc = inicializaComponenteFortementeConectado(numVertices);
-    int *d = inicializaDescoberto(numVertices);
-    int *f = inicializaFinalizado(numVertices);
-    int k;
+    // Fila *fila = inicializaFila();
+    // int *visitados = inicializaVetorInt(numVertices);
+    // int *cfc = inicializaVetorInt(numVertices);
+    // int *d = inicializaVetorInt(numVertices);
+    // int *f = inicializaVetorInt(numVertices);
+    // int k;
 
     // puts("Criando novos nomes: ");
-    preencheVertices(vertices, numVertices, entradaUsuario);
+    // preencheVertices(vertices, numVertices, entradaUsuario);
     // puts("Criando Grafo: ");
-    criaGrafo(G, vertices, entradaUsuario);
+    char** entradaUsuario = (char**) malloc(sizeof(char**));
 
-    // puts("Iniciando Kosarayu: ");
-    if(casoK == 1){
-        k = kosarayu1(G, vertices, visitados, cfc, d, f);
-    } else if(casoK == 2){
-        k = kosarayu2(G, vertices, visitados, cfc, d, f);
+    for (int i = 0; i < 3; i++) {
+        entradaUsuario[i] = (char*) malloc(TAM_PALAVRA * sizeof(char));
     }
 
-    if (k==1) puts("Sim");
-    else puts("Não");
+    strcpy(entradaUsuario[0], "A: B; C;");
+    strcpy(entradaUsuario[1], "B: C;");
+    strcpy(entradaUsuario[2], "C: A;");
 
-    printf("%d\n", k);
+    criaGrafo(G, entradaUsuario);
 
-    // puts("Criando novos nomes: ");
-    char** nomesVertices = criaListaDeNomes(G, cfc, k);
+    for (int i = 0; i < G->numVertices; i++){
+        printf("O vértice %s faz conxões com: ", G->nomesVertice[i]);
+        for (Vertice *p = G->listaAdj[i]; p != NULL; p = p->prox) {
+            printf("%s ", p->nomeVertice);
+        }
+        printf("\n\n");
+    } 
     
-    // puts("Criando Novo Grafo: ");
-    Grafo *GFC = criaGrafoCFC(k, G, cfc, vertices);
+    // puts("Iniciando Kosarayu: ");
+    // if(casoK == 1){
+    //     k = kosarayu1(G, vertices, visitados, cfc, d, f);
+    // } else if(casoK == 2){
+    //     k = kosarayu2(G, vertices, visitados, cfc, d, f);
+    // }
 
-    // puts("DFS: ");
-    DFS(GFC, fila, vertices);
-    // puts("Imprimindo Fila: ");
-    imprimeFila(fila, vertices);
+    // if (k==1) puts("Sim");
+    // else puts("Não");
 
-    printf("\n");
+    // printf("%d\n", k);
 
-    //imprime o grafo de componentes fortemente conectadas
-    imprimeGrafo(GFC);
+    // // puts("Criando novos nomes: ");
+    // char** nomesVertices = criaListaDeNomes(G, cfc, k);
+    
+    // // puts("Criando Novo Grafo: ");
+    // Grafo *GFC = criaGrafoCFC(k, G, cfc, vertices);
+
+    // // puts("DFS: ");
+    // DFS(GFC, fila, vertices);
+    // // puts("Imprimindo Fila: ");
+    // imprimeFila(fila, vertices);
+
+    // printf("\n");
+
+    // //imprime o grafo de componentes fortemente conectadas
+    // imprimeGrafo(GFC);
 }
