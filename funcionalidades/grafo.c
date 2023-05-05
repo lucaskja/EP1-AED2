@@ -23,15 +23,36 @@ int buscarVertice(Grafo* G, char* name) {
     return ERRO;
 }
 
+int verticeExiste(Grafo *G, char *verticeOrigem, char *nome) {
+  for (Vertice *p = G->listaAdj[buscarVertice(G, verticeOrigem)]; p != NULL; p = p->prox)
+      if (strcmp(G->nomesVertice[buscarVertice(G, nome)], p->nomeVertice) == 0)
+        return 0;
+  return 1;
+}
+
+void adicionaArestaCFC(Grafo *G, char *v, char *w) {
+    if (verticeExiste(G, v, w) == 0) return;
+  
+    Vertice *novaConexao = (Vertice*) malloc(sizeof(Vertice));
+    novaConexao->nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
+    novaConexao->prox = (Vertice*) malloc(sizeof(char));
+
+    novaConexao->nomeVertice = strdup(G->nomesVertice[buscarVertice(G, w)]);
+    novaConexao->rotulo = buscarVertice(G, w);
+    novaConexao->prox = G->listaAdj[buscarVertice(G, v)];
+    
+    G->listaAdj[buscarVertice(G, v)] = novaConexao;
+}
+
 void adicionaAresta(Grafo *G, char *v, char *w) {
     Vertice *novaConexao = (Vertice*) malloc(sizeof(Vertice));
     novaConexao->nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
     novaConexao->prox = (Vertice*) malloc(sizeof(char));
 
-    novaConexao->nomeVertice = G->nomesVertice[buscarVertice(G, w)];
+    novaConexao->nomeVertice = strdup(G->nomesVertice[buscarVertice(G, w)]);
     novaConexao->rotulo = buscarVertice(G, w);
-    
     novaConexao->prox = G->listaAdj[buscarVertice(G, v)];
+    
     G->listaAdj[buscarVertice(G, v)] = novaConexao;
 }
 
@@ -53,6 +74,8 @@ void criaGrafo(Grafo *G, char **entrada) {
             conexao = strtok(NULL, ";");
         }
     }
+
+    free(copiaEntrada);
 }
 
 Grafo* transposta(Grafo* G) {

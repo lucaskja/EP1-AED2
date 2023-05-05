@@ -20,6 +20,7 @@ int main(){
     int k;
 
     criaGrafo(G, entradaUsuario);
+    free(entradaUsuario);
     
     if(casoK == 1){
         k = kosarayu1(G, visitados, cfc, d, f);

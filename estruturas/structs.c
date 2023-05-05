@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #define ERRO -1
-#define TAM_PALAVRA 50
+#define TAM_PALAVRA 100
 #define BRANCO 0
 #define CINZA 1
 #define PRETO 2
@@ -16,7 +16,7 @@ typedef struct vertice {
 } Vertice;
 
 typedef struct {
-    char** nomesVertice;
+    char **nomesVertice;
     int numVertices;
     Vertice **listaAdj;
 } Grafo;

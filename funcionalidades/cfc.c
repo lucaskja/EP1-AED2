@@ -22,14 +22,14 @@ char** criaListaDeNomes(Grafo *G, int* cfc, int k){
     return nomeVertices;
 }
 
-void insereNovaAresta(Grafo *G, int* cfc, int i, Grafo *GCF, char** nomeVertices){
+void insereNovaAresta(Grafo *G, int *cfc, int i, Grafo *GCF, char **nomeVertices){
     int j = 0;
     while(j < G->numVertices){
         if(cfc[j] == i){
             Vertice *vertice = G->listaAdj[j];
             while(vertice){
                 if(cfc[vertice->rotulo] != i){
-                    adicionaAresta(GCF, nomeVertices[i], nomeVertices[cfc[vertice->rotulo]]);
+                    adicionaArestaCFC(GCF, nomeVertices[i], nomeVertices[cfc[vertice->rotulo]]);
                 }
                 vertice = vertice->prox;
             }
