@@ -1,5 +1,4 @@
 #include "init.c"
-#include <time.h>
 
 void copiarNomeVertices(Grafo *GT, Grafo *G) {
     for (int i = 0; i < GT->numVertices; i++) GT->nomesVertice[i] = strdup(G->nomesVertice[i]);

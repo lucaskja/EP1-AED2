@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define ERRO -1
 #define TAM_PALAVRA 100
@@ -11,7 +12,9 @@
 #define V_RAND 30
 #define A_RAND 500
 
-typedef struct vertice {
+int tempod, tempof;
+
+typedef struct vertice{
     char *nomeVertice;
     struct vertice *prox;
     int rotulo;
