@@ -1,10 +1,10 @@
 #include "topologica.c"
 
 char** criaListaDeNomes(Grafo *G, int* cfc, int k){
-    char** nomeVertices = (char**) malloc(sizeof(char*)*k);
+    char** nomeVertices = (char**) malloc(k * sizeof(char*));
     int i, j, u;
     for(i = 0 ; i<k ; i++){
-        nomeVertices[i] = (char*) malloc(sizeof(char) * 100);
+        nomeVertices[i] = (char*) malloc(sizeof(char) * TAM_PALAVRA);
     }
     i = u = 0;
     char *aux = (char*) malloc(TAM_PALAVRA * sizeof(char));

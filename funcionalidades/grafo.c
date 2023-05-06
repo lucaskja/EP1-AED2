@@ -1,11 +1,12 @@
 #include "init.c"
+#include <time.h>
 
 void copiarNomeVertices(Grafo *GT, Grafo *G) {
     for (int i = 0; i < GT->numVertices; i++) GT->nomesVertice[i] = strdup(G->nomesVertice[i]);
 }
 
 char **copiarEntrada(int n, char **entrada) {
-    char** cEntrada = (char**) malloc(sizeof(char*));
+    char** cEntrada = (char**) malloc(n * sizeof(char*));
 
     for (int i = 0; i < n; i++) cEntrada[i] = (char*) malloc(TAM_PALAVRA * sizeof(char));
 
@@ -35,7 +36,7 @@ void adicionaArestaCFC(Grafo *G, char *v, char *w) {
   
     Vertice *novaConexao = (Vertice*) malloc(sizeof(Vertice));
     novaConexao->nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
-    novaConexao->prox = (Vertice*) malloc(sizeof(char));
+    novaConexao->prox = (Vertice*) malloc(sizeof(Vertice));
 
     novaConexao->nomeVertice = strdup(G->nomesVertice[buscarVertice(G, w)]);
     novaConexao->rotulo = buscarVertice(G, w);
@@ -47,7 +48,7 @@ void adicionaArestaCFC(Grafo *G, char *v, char *w) {
 void adicionaAresta(Grafo *G, char *v, char *w) {
     Vertice *novaConexao = (Vertice*) malloc(sizeof(Vertice));
     novaConexao->nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
-    novaConexao->prox = (Vertice*) malloc(sizeof(char));
+    novaConexao->prox = (Vertice*) malloc(sizeof(Vertice));
 
     novaConexao->nomeVertice = strdup(G->nomesVertice[buscarVertice(G, w)]);
     novaConexao->rotulo = buscarVertice(G, w);
@@ -101,20 +102,20 @@ Grafo *geradorDeGrafoAleatorio(int numVertices, int numArestas) {
     double prob = (double) numArestas / (numVertices * (numVertices - 1));
 
     Grafo *G = inicializaGrafo(numVertices);
-    Vertice **vertices = inicializaVertices(numVertices);
 
     for (int i = 0; i < numVertices; i++) {
         char *nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
         sprintf(nomeVertice, "%d", i);
-        vertices[i]->rotulo = i;
-        vertices[i]->nomeVertice = nomeVertice;
+        G->nomesVertice[i] = strdup(nomeVertice);
     }
+
+    srand(time(NULL));
 
     for (int v = 0; v < numVertices; v++) {
         for (int w = 0; w < numVertices; w++){
             if(v != w) {
                 if(rand() < prob * (RAND_MAX + 1.0)) {
-                    adicionaAresta(G, vertices[v]->nomeVertice, vertices[w]->nomeVertice);
+                    adicionaAresta(G, G->nomesVertice[v], G->nomesVertice[w]);
                 }
             }
         }

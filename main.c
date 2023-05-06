@@ -6,9 +6,25 @@ int main(){
     scanf("%i", &numVertices);
     scanf("%c", &temp);
 
+    // numVertices = 8;
+    // casoK = 1;
+
     char **entradaUsuario = leituraEntrada(numVertices);
 
     scanf("%i", &casoK);
+
+    // char **entradaUsuario = (char**) malloc(numVertices * sizeof(char*));
+
+    // for (int i = 0; i < numVertices; i++) entradaUsuario[i] = (char*) malloc(TAM_PALAVRA * sizeof(char));
+
+    // entradaUsuario[0] = strdup("a: b");
+    // entradaUsuario[1] = strdup("b: c; e; f");
+    // entradaUsuario[2] = strdup("c: d; g;");
+    // entradaUsuario[3] = strdup("d: c; h;");
+    // entradaUsuario[4] = strdup("e: a; f;");
+    // entradaUsuario[5] = strdup("f: g;");
+    // entradaUsuario[6] = strdup("g: f; h;");
+    // entradaUsuario[7] = strdup("h: h;");
     
     // INICIALIZA AS VARIÁVEIS
     Grafo *G = inicializaGrafo(numVertices);
@@ -20,6 +36,7 @@ int main(){
     int k;
 
     criaGrafo(G, entradaUsuario);
+    imprimeGrafo(G);
     free(entradaUsuario);
     
     if(casoK == 1){
