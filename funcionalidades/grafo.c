@@ -104,9 +104,7 @@ Grafo *geradorDeGrafoAleatorio(int numVertices, int numArestas) {
     Grafo *G = inicializaGrafo(numVertices);
 
     for (int i = 0; i < numVertices; i++) {
-        char *nomeVertice = (char*) malloc(TAM_PALAVRA * sizeof(char));
-        sprintf(nomeVertice, "%d", i);
-        G->nomesVertice[i] = strdup(nomeVertice);
+        sprintf(G->nomesVertice[i], "%d", i);
     }
 
     srand(time(NULL));

@@ -8,6 +8,8 @@
 #define BRANCO 0
 #define CINZA 1
 #define PRETO 2
+#define V_RAND 30
+#define A_RAND 500
 
 typedef struct vertice {
     char *nomeVertice;
