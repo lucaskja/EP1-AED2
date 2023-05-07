@@ -21,7 +21,7 @@ void saidaEntradaPadrao(){
     int k;
 
     criaGrafo(G, entradaUsuario);
-    imprimeGrafo(G);
+    // imprimeGrafo(G);
     free(entradaUsuario);
     
     // CASO DOS 2 KOSARAYUS DIFERENTES

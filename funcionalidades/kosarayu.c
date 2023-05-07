@@ -3,11 +3,11 @@
 // REFERÊNCIA IME = https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/kosaraju.html
 
 void DfsTransposta(Grafo *GT, int v, int* d, int* f) { 
-    d[v] = tempod++; 
+    d[v] = tempo++; 
     for (Vertice* a = GT->listaAdj[v]; a != NULL; a = a->prox)
         if (d[a->rotulo] == -1) 
             DfsTransposta(GT, a->rotulo, d, f); 
-    f[v] = tempof++;
+    f[v] = tempo++;
 }
 
 void DfsKosarayu(Grafo *G, int v, int *cfc, int k) { 
@@ -20,7 +20,7 @@ void DfsKosarayu(Grafo *G, int v, int *cfc, int k) {
 int kosarayu1(Grafo* G, int* visitados, int* cfc, int* d, int* f){
     // FASE 1 DO KOSARAYU
     Grafo* GT = transposta(G);
-    tempod = tempof = 0;
+    tempo = 0;
     int v;
 
     for (v = 0; v < GT->numVertices; v++) d[v] = -1;
@@ -50,7 +50,7 @@ int kosarayu1(Grafo* G, int* visitados, int* cfc, int* d, int* f){
 // BASICAMENTE A MSM COISA DO KOSARAYU 1 SÓ QUE A FASE 1 E A FASE 2 ESTÃO INVERTIDAS
 int kosarayu2(Grafo* G, int* visitados, int* cfc, int* d, int* f){
     // FASE 2
-    tempod = tempof = 0;
+    tempo = 0;
     int v;
 
     for(v = 0 ; v < G->numVertices; v++) d[v] = -1;
