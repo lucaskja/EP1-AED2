@@ -1,5 +1,6 @@
 #include "lerEntrada.c"
 
+// REFERÊNCIA IME = https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/kosaraju.html
 
 void DfsTransposta(Grafo *GT, int v, int* d, int* f) { 
     d[v] = tempod++; 
