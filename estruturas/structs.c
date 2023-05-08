@@ -12,7 +12,7 @@
 #define V_RAND 30
 #define A_RAND 500
 
-int tempo;
+int tempod, tempof;
 
 typedef struct vertice{
     char *nomeVertice;
