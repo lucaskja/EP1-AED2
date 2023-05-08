@@ -32,8 +32,6 @@ int kosarayu1(Grafo* G, int* visitados, int* cfc, int* d, int* f){
        cfc[v] = -1;    // FASE 2 COMEÇA AQUI
     }
     
-    for (v = 0; v < G->numVertices; v++) cfc[v] = -1;
-
     int k = 0;
 
     for (int i = G->numVertices-1; i >= 0; --i) {
